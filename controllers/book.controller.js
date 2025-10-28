@@ -60,7 +60,6 @@ export const bookController = {
           { model: Genre, as: "genres", through: { attributes: [] } },
         ],
       });
-      // Inclure les auteurs et genres associés include: [Author, Genre]
       if (!book) return res.status(404).json({ error: "Livre non trouvé" });
       res.json(book);
     } catch (error) {
@@ -72,97 +71,96 @@ export const bookController = {
     try {
       const book = await Book.findByPk(req.params.id);
       if (!book) {
-        return res.status(404).json({ error: "Book not found" });
+        return res.status(404).json({ error: "Livre non trouvé" });
       }
-      book.cover = `${req.protocol}://${req.get("host")}/uploads/books/images/${
-        req.file.filename
-      }`;
+      book.cover = `${req.protocol}://${req.get("host")}/uploads/books/images/${req.file.filename
+        }`;
       await book.save();
 
       res.status(200).json({
-        message: "Cover image uploaded successfully",
+        message: "Image de couverture téléchargée avec succès",
         cover_url: book.cover,
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "Erreur serveur" });
     }
   },
 
   async searchBooks(req, res) {
-  try {
-    const { q, type } = req.query;
+    try {
+      const { q, type } = req.query;
 
-    if (!q || q.trim().length < 2) {
-      return res.json([]);
-    }
+      if (!q || q.trim().length < 2) {
+        return res.json([]); // on retourne un tableau vide si recherche de moins de 2 caractères
+      }
 
-    const searchTerm = q.trim();
-    const words = searchTerm.split(/\s+/);
+      const searchTerm = q.trim(); //supprime les espaces
+      const words = searchTerm.split(/\s+/); //sépare le terme en mots
 
-    let results = [];
+      let results = [];
 
-    if (!type || type === "title") {
-      // Recherche dans les titres
-      results = [...results, ...(await Book.findAll({
-        where: {
-          [Op.or]: [
-            { title: { [Op.iLike]: `%${searchTerm}%` } }
-          ]
-        },
-        include: [{ model: Author, as: "authors" }, { model: Genre, as: "genres" }],
-        limit: 10
-      }))];
-    }
-
-    if (!type || type === "author") {
-      // Recherche par auteur
-      results = [...results, ...(await Book.findAll({
-        include: [
-          {
-            model: Author,
-            as: "authors",
-            where: {
-              [Op.and]: words.map(word => ({
-                [Op.or]: [
-                  { firstname: { [Op.iLike]: `%${word}%` } },
-                  { name: { [Op.iLike]: `%${word}%` } }
-                ]
-              }))
-            }
+      if (!type || type === "title") {
+        // Recherche dans les titres
+        results = [...results, ...(await Book.findAll({
+          where: {
+            [Op.or]: [
+              { title: { [Op.iLike]: `%${searchTerm}%` } }
+            ]
           },
-          { model: Genre, as: "genres" }
-        ],
-        limit: 10
-      }))];
+          include: [{ model: Author, as: "authors" }, { model: Genre, as: "genres" }],
+          limit: 10
+        }))];
+      }
+
+      if (!type || type === "author") {
+        // Recherche par auteur
+        results = [...results, ...(await Book.findAll({
+          include: [
+            {
+              model: Author,
+              as: "authors",
+              where: {
+                [Op.and]: words.map(word => ({
+                  [Op.or]: [
+                    { firstname: { [Op.iLike]: `%${word}%` } },
+                    { name: { [Op.iLike]: `%${word}%` } }
+                  ]
+                }))
+              }
+            },
+            { model: Genre, as: "genres" }
+          ],
+          limit: 10
+        }))];
+      }
+
+      if (!type || type === "genre") {
+        // Recherche par genre
+        results = [...results, ...(await Book.findAll({
+          include: [
+            { model: Author, as: "authors" },
+            {
+              model: Genre,
+              as: "genres",
+              where: { name: { [Op.iLike]: `%${searchTerm}%` } }
+            }
+          ],
+          limit: 10
+        }))];
+      }
+
+      // Dédupliquer : sert à n'afficher qu'une fois un livre qui correspond à plusieurs requêtes 
+      const uniqueBooks = results.reduce((uniqueList, book) => {
+        if (!uniqueList.find(existingBook => existingBook.id === book.id)) uniqueList.push(book); // si le livre n'existe pas, on l'ajoute
+        return uniqueList;
+      }, []);
+
+      res.json(uniqueBooks.slice(0, 10));
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erreur recherche" });
     }
-
-    if (!type || type === "genre") {
-      // Recherche par genre
-      results = [...results, ...(await Book.findAll({
-        include: [
-          { model: Author, as: "authors" },
-          {
-            model: Genre,
-            as: "genres",
-            where: { name: { [Op.iLike]: `%${searchTerm}%` } }
-          }
-        ],
-        limit: 10
-      }))];
-    }
-
-    // Dédupliquer
-    const uniqueBooks = results.reduce((acc, book) => {
-      if (!acc.find(b => b.id === book.id)) acc.push(book);
-      return acc;
-    }, []);
-
-    res.json(uniqueBooks.slice(0, 10));
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur recherche" });
   }
-}
 
 };

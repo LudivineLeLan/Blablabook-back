@@ -10,11 +10,11 @@ export const userAuthentificationController = {
     try {
       const { name, email, password, firstname, age } = Joi.attempt(req.body, registerSchema);
 
-      const isUserExists = await User.findOne({
+      const UserExists = await User.findOne({
         where: { email }
       });
 
-      if (isUserExists) {
+      if (UserExists) {
         return res.status(409).json({ error: "Utilisateur déjà existant" });
       }
 
@@ -53,7 +53,7 @@ export const userAuthentificationController = {
         }
       });
     } catch (error) {
-      console.error("Erreur register :", error);
+      console.error("Error register :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
   },
@@ -67,13 +67,13 @@ export const userAuthentificationController = {
       });
 
       if (!user) {
-        return res.status(404).json({ error: "Utilisateur n'existe pas" });
+        return res.status(404).json({ error: "Cet utilisateur n'existe pas" });
       }
 
       const isPasswordValid = await argon2.verify(user.password, password);
 
       if (!isPasswordValid) {
-        return res.status(403).json({ error: "Password is incorrect" });
+        return res.status(403).json({ error: "Mot de passe incorrect" });
       }
 
       const token = jwt.sign(
@@ -98,7 +98,7 @@ export const userAuthentificationController = {
         }
       });
     } catch (error) {
-      console.error("Erreur login :", error);
+      console.error("Error login :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
   },

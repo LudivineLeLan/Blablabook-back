@@ -3,11 +3,7 @@ import Joi from "joi";
 import { createUserSchema } from '../schemas/user.schema.js';
 
 
-
-
-
 export const userController = {
-
 
   async getUsers(req, res) {
     try {
@@ -57,7 +53,7 @@ export const userController = {
     const { username, password } = req.body;
     const user = await User.findOne({ where: { username: username } });
     if (!user || user.password !== password) {
-      return res.status(401).json({ error: 'User not valid' });
+      return res.status(401).json({ error: 'Utilisateur non valide' });
     }
   },
 
@@ -66,14 +62,14 @@ export const userController = {
     try {
       const { userId } = req.params;
       if (!userId) {
-        return res.status(400).json({ error: 'UserId is required' });
+        return res.status(400).json({ error: `L'ID utilisateur est requis` });
       }
       user.avatar = req.file.path;
       await user.save();
-      res.status(200).json({ message: 'Avatar image uploaded successfully' });
+      res.status(200).json({ message: 'Image téléchargée avec succès' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Erreur serveur' });
     }
   }
 };

@@ -2,25 +2,22 @@ import { User, Book, UserBook, Author } from '../models/index.js';
 
 export const userbookController = {
   async getBooks(req, res) {
-    // console.log('getBooks appelé');
-    // console.log('req.user:', req.user);
-
+    //parseInt pour convertir paramètres de la query string en nombre entier 
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
     const offset = (page - 1) * limit;
 
     try {
       const user = await User.findByPk(req.user.id);
-      // console.log('User trouvé:', user ? user.id : 'null');
-
       if (!user) {
-        return res.status(404).json({ error: 'User not found' });
+        return res.status(404).json({ error: 'Utilisateur introuvable' });
       }
 
       const userbooks = await UserBook.findAll({
         where: { user_id: user.id },
         include: [
-          { model: Book, as: "book",
+          {
+            model: Book, as: "book",
             include: [
               { model: Author, as: "authors" }
             ]
@@ -43,7 +40,6 @@ export const userbookController = {
         userbooks
       });
     } catch (error) {
-      // console.log(error);
       res.status(500).json({ error: 'Erreur lors de la récupération de la booklist' });
     }
 
@@ -84,7 +80,6 @@ export const userbookController = {
       });
 
     } catch (error) {
-      // console.error(error);
       return res.status(500).json({ error: "Erreur serveur", error: error.message });
     }
   },
@@ -112,16 +107,15 @@ export const userbookController = {
           message: "Livre retiré de la booklist avec succès."
         });
       } else {
-        return res.status(404).json({ 
-          message: "Livre non trouvé dans la booklist." 
+        return res.status(404).json({
+          message: "Livre non trouvé dans la booklist."
         });
       }
 
     } catch (error) {
-      // console.error(error);
-      return res.status(500).json({ 
-        error: "Erreur serveur", 
-        message: error.message 
+      return res.status(500).json({
+        error: "Erreur serveur",
+        message: error.message
       });
     }
   },
@@ -155,16 +149,15 @@ export const userbookController = {
           message: "Statut de lecture mis à jour avec succès."
         });
       } else {
-        return res.status(404).json({ 
-          message: "Livre non trouvé dans la booklist." 
+        return res.status(404).json({
+          message: "Livre non trouvé dans la booklist."
         });
       }
 
     } catch (error) {
-      // console.error(error);
-      return res.status(500).json({ 
-        error: "Erreur serveur", 
-        message: error.message 
+      return res.status(500).json({
+        error: "Erreur serveur",
+        message: error.message
       });
     }
   },
@@ -188,22 +181,21 @@ export const userbookController = {
       });
 
       if (userbook) {
-        return res.status(200).json({ 
-          inBooklist: true, 
-          toRead: userbook.toRead 
+        return res.status(200).json({
+          inBooklist: true,
+          toRead: userbook.toRead
         });
       } else {
-        return res.status(200).json({ 
-          inBooklist: false, 
-          toRead: false 
+        return res.status(200).json({
+          inBooklist: false,
+          toRead: false
         });
       }
 
     } catch (error) {
-      // console.error(error);
-      return res.status(500).json({ 
-        error: "Erreur serveur", 
-        message: error.message 
+      return res.status(500).json({
+        error: "Erreur serveur",
+        message: error.message
       });
     }
   }
