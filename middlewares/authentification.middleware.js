@@ -5,7 +5,7 @@ export function authenticate(req, res, next) {
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(403).json({
-      error: "You can't have access to this resource, please authentify",
+      error: "Accès refusé : vous devez être authentifié pour accéder à cette ressource",
     });
   }
 
@@ -16,10 +16,10 @@ export function authenticate(req, res, next) {
 
     req.user = decoded;
     next();
-  } catch (err) {
-    console.error("JWT error:", err.message);
+  } catch (error) {
+    console.error("JWT error:", error.message);
     return res.status(403).json({
-      error: "Your token is invalid or has expired",
+      error: "Token invalide ou expiré",
     });
   }
 }
