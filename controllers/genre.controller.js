@@ -8,7 +8,7 @@ export const genreController = {
       const genres = await Genre.findAll({});
       res.json(genres);
     } catch (error) {
-      res.status(500).json({ error: 'Cannot get genres' });
+      res.status(500).json({ error: 'Impossible de récupérer les genres' });
     }
   },
 
@@ -16,15 +16,15 @@ export const genreController = {
     try {
       const { id } = req.params;
       if (isNaN(id)) {
-        return res.status(400).json({ error: "Invalid ID format" });
+        return res.status(400).json({ error: "Format d'ID invalide" });
       }
       const genre = await Genre.findByPk(id);
       if (!genre) {
-        return res.status(404).json({ error: "Genre not found. Please verify the provided ID" });
+        return res.status(404).json({ error: "Genre non trouvé. Veuillez vérifier l'ID fourni" });
       }
       res.status(200).json(genre);
-    } catch (err) {
-      res.status(500).json({ error: "Internal server error" });
+    } catch (error) {
+      res.status(500).json({ error: "Erreur serveur" });
     }
   },
 };
