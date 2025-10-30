@@ -57,6 +57,29 @@ export const userController = {
     }
   },
 
+  async deleteUser(req, res) {
+    try {
+      const { id } = req.params;
+      const authUserId = req.user.id;
+
+      if (parseInt(id) !== authUserId) {
+        return res.status(403).json({ error: 'Vous ne pouvez pas supprimer ce compte' });
+      }
+
+      const deletedCount = await User.destroy({ where: { id } });
+
+      if (deletedCount === 0) {
+        return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      }
+
+      return res.status(200).json({ message: 'Compte supprimé avec succès' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Une erreur est survenue lors de la suppression du compte' });
+    }
+  },
+
+
   async userAvatar(req, res) {
 
     try {
