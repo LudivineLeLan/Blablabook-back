@@ -18,3 +18,5 @@ userRouter.post('/user', userController.createUser);
 userRouter.get('/users', userController.getUsers);
 
 userRouter.get('/user/:id', userController.getUserById);
+
+userRouter.delete('/user/:id', authenticate, userController.deleteUser);
