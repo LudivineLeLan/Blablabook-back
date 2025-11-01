@@ -5,6 +5,7 @@ import { User } from "../models/user.model.js";
 import { loginSchema } from "../schemas/login.schema.js";
 import { registerSchema } from "../schemas/register.schema.js";
 import { sendEmail } from "../config/email.js"; // pour gérer l'envoi de mails auto
+import { v4 as uuidv4 } from "uuid"; // utilisé AVANT la connexion pour valider un lien unique
 
 
 export const userAuthentificationController = {
