@@ -36,6 +36,25 @@ User.init(
       type: DataTypes.STRING(100),
       allowNull: true
     },
+    // pour gérer liens de confirmation et réinitilisation de mot de passe 
+    is_confirmed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    token_confirm: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    token_reset: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    token_reset_expires: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }
+
 
   },
   {
