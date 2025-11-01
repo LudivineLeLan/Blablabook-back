@@ -6,7 +6,6 @@ import { updateAccountSchema } from '../schemas/updateaccount.schema.js';
 import argon2 from "argon2";
 
 
-
 export const userController = {
 
   async getUsers(req, res) {
