@@ -51,34 +51,7 @@ export const userAuthentificationController = {
       res.status(500).json({ error: "Erreur serveur" });
     }
   },
-  /*  // Générer le token
-   const token = jwt.sign(
-     {
-       email: newUser.email,
-       id: newUser.id
-     },
-     process.env.JWT_SECRET,
-     { expiresIn: "7d" }
-   );
 
-   // Renvoyer le token ET l'utilisateur
-   res.status(201).json({
-     message: "Compte créé",
-     token,
-     user: {
-       id: newUser.id,
-       name: newUser.name,
-       firstname: newUser.firstname,
-       email: newUser.email,
-       age: newUser.age,
-       avatar: newUser.avatar
-     }
-   });
- } catch (error) {
-   console.error("Error register :", error);
-   res.status(500).json({ error: "Erreur serveur" });
- }
-}, */
 
   async confirmAccount(req, res) {
     try {
@@ -177,10 +150,8 @@ export const userAuthentificationController = {
       user.token_reset_expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 jours
       await user.save();
 
-      const resetLink = `http://localhost:3000/api/auth/reset-password/${tokenReset}`;
-      await sendEmail(process.env.EMAILJS_TEMPLATE_ID_RESET, email, { reset_link: resetLink });
-
-      res.status(200).json({ message: "Un lien de réinitialisation a été envoyé à ton adresse email." });
+      // on renvoie le token au front
+      res.status(200).json({ message: "Token généré", token: tokenReset });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Erreur serveur" });
