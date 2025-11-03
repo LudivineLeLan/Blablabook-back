@@ -22,3 +22,10 @@ userRouter.get('/user/:id', userController.getUserById);
 userRouter.delete('/user/:id', authenticate, userController.deleteUser);
 
 userRouter.patch('/user/:id', authenticate, avatarUpload.single('avatar'), userController.editUserAccount);
+
+userRouter.get("/confirm/:token", userAuthentificationController.confirmAccount);
+
+userRouter.post("/forgot-password", userAuthentificationController.forgotPassword);
+
+userRouter.post("/reset-password/:token", userAuthentificationController.resetPassword);
+

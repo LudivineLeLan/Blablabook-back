@@ -3,12 +3,91 @@ import { Genre, Book, Author, User, UserBook, sequelize } from "../models/index.
 console.log("🌱 Seeding des tables...");
 
 // Notre premier user !
-const user1 = await User.create({ name: "Doe", firstname: "John", age: 25, role: "user", email: "John@Doe.example", password: "123456abc", avatar: "😂" });
-const user2 = await User.create({ name: "Martin", firstname: "Sébastien", age: 32, role: "user", email: "sebastien.martin@example.com", password: "passSeba123", avatar: "🧔" });
-const user3 = await User.create({ name: "Durand", firstname: "Ludivine", age: 29, role: "user", email: "ludivine.durand@example.com", password: "passLudi456", avatar: "👩‍🎨" });
-const user4 = await User.create({ name: "Bernard", firstname: "Claude", age: 45, role: "user", email: "claude.bernard@example.com", password: "passClaude789", avatar: "🧓" });
-const user5 = await User.create({ name: "Lemoine", firstname: "Bastien", age: 27, role: "user", email: "bastien.lemoine@example.com", password: "passBastien321", avatar: "👨‍💻" });
-const user6 = await User.create({ name: "Dupuis", firstname: "Vincent", age: 34, role: "user", email: "vincent.dupuis@example.com", password: "passVincent654", avatar: "🧠" });
+// USERS
+const user1 = await User.create({
+  name: "Doe",
+  firstname: "John",
+  age: 25,
+  role: "user",
+  email: "John@Doe.example",
+  password: "123456abc",
+  avatar: "😂",
+  is_confirmed: true,
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
+
+const user2 = await User.create({
+  name: "Martin",
+  firstname: "Sébastien",
+  age: 32,
+  role: "user",
+  email: "sebastien.martin@example.com",
+  password: "passSeba123",
+  avatar: "🧔",
+  is_confirmed: true,
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
+
+const user3 = await User.create({
+  name: "Durand",
+  firstname: "Ludivine",
+  age: 29,
+  role: "user",
+  email: "ludivine.durand@example.com",
+  password: "passLudi456",
+  avatar: "👩‍🎨",
+  is_confirmed: false, // utilisateur non confirmé pour test
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
+
+const user4 = await User.create({
+  name: "Bernard",
+  firstname: "Claude",
+  age: 45,
+  role: "user",
+  email: "claude.bernard@example.com",
+  password: "passClaude789",
+  avatar: "🧓",
+  is_confirmed: true,
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
+
+const user5 = await User.create({
+  name: "Lemoine",
+  firstname: "Bastien",
+  age: 27,
+  role: "user",
+  email: "bastien.lemoine@example.com",
+  password: "passBastien321",
+  avatar: "👨‍💻",
+  is_confirmed: false,
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
+
+const user6 = await User.create({
+  name: "Dupuis",
+  firstname: "Vincent",
+  age: 34,
+  role: "user",
+  email: "vincent.dupuis@example.com",
+  password: "passVincent654",
+  avatar: "🧠",
+  is_confirmed: true,
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
+
 
 
 // notre premier livre
@@ -31,147 +110,147 @@ const book16 = await Book.create({ title: "La Servante Écarlate", release_date:
 const book17 = await Book.create({ title: "Druss la Légende", release_date: "1993-06-01", cover: "http://localhost:3000/uploads/books/images/druss-la-legende.jpg", synopsis: "Une épopée fantasy sur un guerrier mythique, entre honneur, combat et solitude." });
 const book18 = await Book.create({ title: "Endymion", release_date: "1996-02-01", cover: "http://localhost:3000/uploads/books/images/endymion.jpg", synopsis: "Une aventure de science-fiction dans l’univers d’Hyperion, entre poésie et technologie." });
 const book19 = await Book.create({ title: "Le Seigneur des Anneaux", release_date: "1954-07-29", cover: "http://localhost:3000/uploads/books/images/le-seigneur-des-anneaux.jpg", synopsis: "La quête épique de l’Anneau unique dans un monde fantastique peuplé de héros et de ténèbres." });
-const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "http://localhost:3000/uploads/books/images/conan.jpg" , synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
+const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "http://localhost:3000/uploads/books/images/conan.jpg", synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
 
 
 // Les userbooks
 
 const userbook1 = await UserBook.bulkCreate([
-   { user_id: user2.id, book_id: book20.id, toRead: true }, 
-   { user_id: user2.id, book_id: book17.id, toRead: false }, 
-   { user_id: user2.id, book_id: book9.id, toRead: true }
+  { user_id: user2.id, book_id: book20.id, toRead: true },
+  { user_id: user2.id, book_id: book17.id, toRead: false },
+  { user_id: user2.id, book_id: book9.id, toRead: true }
 ]);
 const userbook2 = await UserBook.bulkCreate([
-   { user_id: user3.id, book_id: book2.id, toRead: false },
-   { user_id: user3.id, book_id: book7.id, toRead: false },
-   { user_id: user3.id, book_id: book15.id, toRead: false },
-   { user_id: user3.id, book_id: book16.id, toRead: false }
+  { user_id: user3.id, book_id: book2.id, toRead: false },
+  { user_id: user3.id, book_id: book7.id, toRead: false },
+  { user_id: user3.id, book_id: book15.id, toRead: false },
+  { user_id: user3.id, book_id: book16.id, toRead: false }
 ]);
 const userbook3 = await UserBook.bulkCreate([
-   { user_id: user4.id, book_id: book5.id, toRead: false },
-   { user_id: user4.id, book_id: book6.id, toRead: false },
-   { user_id: user4.id, book_id: book10.id, toRead: false },
-   { user_id: user4.id, book_id: book13.id, toRead: false },
-   { user_id: user4.id, book_id: book14.id, toRead: true }
+  { user_id: user4.id, book_id: book5.id, toRead: false },
+  { user_id: user4.id, book_id: book6.id, toRead: false },
+  { user_id: user4.id, book_id: book10.id, toRead: false },
+  { user_id: user4.id, book_id: book13.id, toRead: false },
+  { user_id: user4.id, book_id: book14.id, toRead: true }
 ]);
-const userbook4 = await UserBook.create({ user_id: user5.id, book_id: book9.id, toRead: true  });
+const userbook4 = await UserBook.create({ user_id: user5.id, book_id: book9.id, toRead: true });
 const userbook5 = await UserBook.create({ user_id: user6.id, book_id: book18.id, toRead: false });
 
 
 // Les auteurs 
 
 const author1 = await Author.create({
-   name: "Dumas",
-   firstname: "Alexandre",
-   bio: "Alexandre Dumas, écrivain français du XIXe siècle, est célèbre pour ses romans historiques et d'aventure comme 'Les Trois Mousquetaires' et 'Le Comte de Monte-Cristo'. Son œuvre prolifique mêle panache, intrigue et héroïsme."
+  name: "Dumas",
+  firstname: "Alexandre",
+  bio: "Alexandre Dumas, écrivain français du XIXe siècle, est célèbre pour ses romans historiques et d'aventure comme 'Les Trois Mousquetaires' et 'Le Comte de Monte-Cristo'. Son œuvre prolifique mêle panache, intrigue et héroïsme."
 });
 
 const author2 = await Author.create({
-   name: "Austen",
-   firstname: "Jane",
-   bio: "Jane Austen, romancière anglaise du XIXe siècle, a marqué la littérature avec ses portraits ironiques de la société britannique. Ses œuvres comme 'Orgueil et Préjugés' explorent les relations et les conventions sociales."
+  name: "Austen",
+  firstname: "Jane",
+  bio: "Jane Austen, romancière anglaise du XIXe siècle, a marqué la littérature avec ses portraits ironiques de la société britannique. Ses œuvres comme 'Orgueil et Préjugés' explorent les relations et les conventions sociales."
 });
 
 const author3 = await Author.create({
-   name: "Strayed",
-   firstname: "Cheryl",
-   bio: "Cheryl Strayed est une autrice américaine connue pour 'Wild', récit autobiographique d’un voyage initiatique sur le Pacific Crest Trail. Elle explore les thèmes du deuil, de la résilience et de la quête de soi."
+  name: "Strayed",
+  firstname: "Cheryl",
+  bio: "Cheryl Strayed est une autrice américaine connue pour 'Wild', récit autobiographique d’un voyage initiatique sur le Pacific Crest Trail. Elle explore les thèmes du deuil, de la résilience et de la quête de soi."
 });
 
 const author4 = await Author.create({
-   name: "Andrea",
-   firstname: "Jean-Baptiste",
-   bio: "Jean-Baptiste Andrea est un écrivain et réalisateur français. Ses romans sensibles et poétiques, comme 'Des diables et des saints', explorent l’enfance, la solitude et la rédemption avec une grande humanité."
+  name: "Andrea",
+  firstname: "Jean-Baptiste",
+  bio: "Jean-Baptiste Andrea est un écrivain et réalisateur français. Ses romans sensibles et poétiques, comme 'Des diables et des saints', explorent l’enfance, la solitude et la rédemption avec une grande humanité."
 });
 
 const author5 = await Author.create({
-   name: "Chapman",
-   firstname: "Julia",
-   bio: "Julia Chapman est une autrice britannique spécialisée dans les romans policiers. Sa série 'Les Détectives du Yorkshire' mêle humour, mystère et ambiance rurale dans un cadre pittoresque du nord de l’Angleterre."
+  name: "Chapman",
+  firstname: "Julia",
+  bio: "Julia Chapman est une autrice britannique spécialisée dans les romans policiers. Sa série 'Les Détectives du Yorkshire' mêle humour, mystère et ambiance rurale dans un cadre pittoresque du nord de l’Angleterre."
 });
 
 const author6 = await Author.create({
-   name: "Yazawa",
-   firstname: "Ai",
-   bio: "Ai Yazawa est une mangaka japonaise renommée pour ses œuvres 'NANA' et 'Paradise Kiss'. Elle explore les thèmes de la mode, de l’amour et de l’indépendance avec un style graphique distinctif et émotionnel."
+  name: "Yazawa",
+  firstname: "Ai",
+  bio: "Ai Yazawa est une mangaka japonaise renommée pour ses œuvres 'NANA' et 'Paradise Kiss'. Elle explore les thèmes de la mode, de l’amour et de l’indépendance avec un style graphique distinctif et émotionnel."
 });
 
 const author7 = await Author.create({
-   name: "Makkai",
-   firstname: "Rebecca",
-   bio: "Rebecca Makkai est une romancière américaine saluée pour 'Les Optimistes', un roman poignant sur la mémoire, la perte et l’épidémie du sida. Elle mêle finesse psychologique et narration subtile."
+  name: "Makkai",
+  firstname: "Rebecca",
+  bio: "Rebecca Makkai est une romancière américaine saluée pour 'Les Optimistes', un roman poignant sur la mémoire, la perte et l’épidémie du sida. Elle mêle finesse psychologique et narration subtile."
 });
 
 const author8 = await Author.create({
-   name: "Nguyen",
-   firstname: "Viet Thanh",
-   bio: "Viet Thanh Nguyen est un écrivain vietnamien-américain, lauréat du prix Pulitzer pour 'Le Sympathisant'. Son œuvre interroge l’identité, l’exil et les cicatrices de la guerre du Vietnam."
+  name: "Nguyen",
+  firstname: "Viet Thanh",
+  bio: "Viet Thanh Nguyen est un écrivain vietnamien-américain, lauréat du prix Pulitzer pour 'Le Sympathisant'. Son œuvre interroge l’identité, l’exil et les cicatrices de la guerre du Vietnam."
 });
 
 const author9 = await Author.create({
-   name: "Grange",
-   firstname: "Amanda",
-   bio: "Amanda Grange est une autrice britannique connue pour ses réécritures des romans de Jane Austen du point de vue masculin, comme 'Le Journal de Mr Darcy'. Elle revisite les classiques avec élégance et sensibilité."
+  name: "Grange",
+  firstname: "Amanda",
+  bio: "Amanda Grange est une autrice britannique connue pour ses réécritures des romans de Jane Austen du point de vue masculin, comme 'Le Journal de Mr Darcy'. Elle revisite les classiques avec élégance et sensibilité."
 });
 
 const author10 = await Author.create({
-   name: "Nakamura",
-   firstname: "Sayaka",
-   bio: "Sayaka Nakamura est une autrice japonaise spécialisée dans les récits fantastiques et poétiques. Elle est notamment connue pour 'Confiserie fictive', une œuvre délicate mêlant rêve et gourmandise."
+  name: "Nakamura",
+  firstname: "Sayaka",
+  bio: "Sayaka Nakamura est une autrice japonaise spécialisée dans les récits fantastiques et poétiques. Elle est notamment connue pour 'Confiserie fictive', une œuvre délicate mêlant rêve et gourmandise."
 });
 
 const author11 = await Author.create({
-   name: "Menegaux",
-   firstname: "Mathieu",
-   bio: "Mathieu Menegaux est un écrivain français contemporain. Ses romans courts et percutants abordent des sujets sensibles comme la justice, la culpabilité et les violences faites aux femmes."
+  name: "Menegaux",
+  firstname: "Mathieu",
+  bio: "Mathieu Menegaux est un écrivain français contemporain. Ses romans courts et percutants abordent des sujets sensibles comme la justice, la culpabilité et les violences faites aux femmes."
 });
 
 const author12 = await Author.create({
-   name: "Noda",
-   firstname: "Satoru",
-   bio: "Satoru Noda est un mangaka japonais, auteur de 'Golden Kamui', un manga historique et d’action se déroulant après la guerre russo-japonaise. Il mêle aventure, humour et ethnographie aïnou."
+  name: "Noda",
+  firstname: "Satoru",
+  bio: "Satoru Noda est un mangaka japonais, auteur de 'Golden Kamui', un manga historique et d’action se déroulant après la guerre russo-japonaise. Il mêle aventure, humour et ethnographie aïnou."
 });
 
 const author13 = await Author.create({
-   name: "Delaume",
-   firstname: "Chloé",
-   bio: "Chloé Delaume est une autrice française singulière, mêlant autofiction, poésie et expérimentation littéraire. Elle explore les identités fragmentées et les récits intimes, notamment dans 'Ernestine'."
+  name: "Delaume",
+  firstname: "Chloé",
+  bio: "Chloé Delaume est une autrice française singulière, mêlant autofiction, poésie et expérimentation littéraire. Elle explore les identités fragmentées et les récits intimes, notamment dans 'Ernestine'."
 });
 
 const author14 = await Author.create({
-   name: "Riley",
-   firstname: "Lucinda",
-   bio: "Lucinda Riley est une romancière britannique célèbre pour la saga 'Les Sept Sœurs', mêlant romance, mystère et secrets de famille à travers le monde. Son œuvre séduit par son souffle narratif."
+  name: "Riley",
+  firstname: "Lucinda",
+  bio: "Lucinda Riley est une romancière britannique célèbre pour la saga 'Les Sept Sœurs', mêlant romance, mystère et secrets de famille à travers le monde. Son œuvre séduit par son souffle narratif."
 });
 
 const author15 = await Author.create({
-   name: "Atwood",
-   firstname: "Margaret",
-   bio: "Margaret Atwood est une écrivaine canadienne majeure, connue pour 'La Servante écarlate'. Elle explore les dystopies, les rapports de pouvoir et les enjeux féministes avec une plume acérée."
+  name: "Atwood",
+  firstname: "Margaret",
+  bio: "Margaret Atwood est une écrivaine canadienne majeure, connue pour 'La Servante écarlate'. Elle explore les dystopies, les rapports de pouvoir et les enjeux féministes avec une plume acérée."
 });
 
 const author16 = await Author.create({
-   name: "Gemmell",
-   firstname: "David",
-   bio: "David Gemmell était un auteur britannique de fantasy, célèbre pour ses récits épiques comme 'Druss la Légende'. Il mêle héroïsme, tragédie et réflexion sur le courage et la destinée."
+  name: "Gemmell",
+  firstname: "David",
+  bio: "David Gemmell était un auteur britannique de fantasy, célèbre pour ses récits épiques comme 'Druss la Légende'. Il mêle héroïsme, tragédie et réflexion sur le courage et la destinée."
 });
 
 const author17 = await Author.create({
-   name: "Simmons",
-   firstname: "Dan",
-   bio: "Dan Simmons est un écrivain américain prolifique, connu pour ses sagas de science-fiction comme 'Hyperion' et 'Endymion'. Il mêle érudition, mysticisme et narration complexe."
+  name: "Simmons",
+  firstname: "Dan",
+  bio: "Dan Simmons est un écrivain américain prolifique, connu pour ses sagas de science-fiction comme 'Hyperion' et 'Endymion'. Il mêle érudition, mysticisme et narration complexe."
 });
 
 const author18 = await Author.create({
-   name: "Tolkien",
-   firstname: "J.R.R.",
-   bio: "J.R.R. Tolkien, philologue et écrivain britannique, est le père de la fantasy moderne. Son œuvre majeure, 'Le Seigneur des Anneaux', a marqué des générations par son univers riche et mythologique."
+  name: "Tolkien",
+  firstname: "J.R.R.",
+  bio: "J.R.R. Tolkien, philologue et écrivain britannique, est le père de la fantasy moderne. Son œuvre majeure, 'Le Seigneur des Anneaux', a marqué des générations par son univers riche et mythologique."
 });
 
 const author19 = await Author.create({
-   name: "Howard",
-   firstname: "Robert E.",
-   bio: "Robert E. Howard est un écrivain américain du début du XXe siècle, créateur de Conan le Barbare. Il est considéré comme un pionnier de la fantasy héroïque et du pulp fiction."
+  name: "Howard",
+  firstname: "Robert E.",
+  bio: "Robert E. Howard est un écrivain américain du début du XXe siècle, créateur de Conan le Barbare. Il est considéré comme un pionnier de la fantasy héroïque et du pulp fiction."
 });
 
 
