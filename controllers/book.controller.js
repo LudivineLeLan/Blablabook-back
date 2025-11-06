@@ -67,26 +67,6 @@ export const bookController = {
     }
   },
 
-  async uploadCover(req, res) {
-    try {
-      const book = await Book.findByPk(req.params.id);
-      if (!book) {
-        return res.status(404).json({ error: "Livre non trouvé" });
-      }
-      book.cover = `${req.protocol}://${req.get("host")}/uploads/books/images/${req.file.filename
-        }`;
-      await book.save();
-
-      res.status(200).json({
-        message: "Image de couverture téléchargée avec succès",
-        cover_url: book.cover,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Erreur serveur" });
-    }
-  },
-
   async searchBooks(req, res) {
     try {
       const { q, type } = req.query;
