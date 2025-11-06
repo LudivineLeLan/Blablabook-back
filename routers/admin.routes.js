@@ -1,6 +1,8 @@
-import Router from "express";
-import { authAdmin } from "../middleware/authAdmin.js";
+import { Router } from "express";
+import { authAdmin } from "../middlewares/authAdmin.js";
 import { adminController } from "../controllers/index.js";
+import upload from "../middlewares/uploadCover.middleware.js";
+
 
 export const adminRouter = Router();
 

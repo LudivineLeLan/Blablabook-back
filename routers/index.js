@@ -14,4 +14,4 @@ apiRouter.use(authorRouter);
 apiRouter.use(genreRouter);
 apiRouter.use(userRouter);
 apiRouter.use(userbookRouter);
-apiRouter.use(adminRouter);
+apiRouter.use("/admin", adminRouter);
