@@ -22,6 +22,28 @@ export const adminController = {
     }
   },
 
+  async updateUserRole(req, res) {
+    try {
+      const { id } = req.params;
+      const { role } = req.body;
+
+      const user = await User.findByPk(id);
+      if (!user) return res.status(404).json({ error: "Utilisateur non trouvé" });
+
+      if (!['user', 'admin'].includes(role)) {
+        return res.status(400).json({ error: "Rôle invalide" });
+      }
+
+      user.role = role;
+      await user.save();
+
+      res.json({ message: "Rôle mis à jour", user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erreur serveur lors de la mise à jour du rôle" });
+    }
+  },
+
 
   async getAllBooks(req, res) {
     try {

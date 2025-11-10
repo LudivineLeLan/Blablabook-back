@@ -8,7 +8,7 @@ export const adminRouter = Router();
 
 adminRouter.get("/users", authAdmin, adminController.getAllUsers);
 adminRouter.delete("/users/:id", authAdmin, adminController.deleteUser);
-
+adminRouter.patch("/users/:id", authAdmin, adminController.updateUserRole);
 adminRouter.get("/books", authAdmin, adminController.getAllBooks);
 adminRouter.delete("/books/:id", authAdmin, adminController.deleteBook);
 adminRouter.put("/books/:id", authAdmin, adminController.updateBook);
