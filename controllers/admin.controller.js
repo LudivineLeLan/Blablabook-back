@@ -92,11 +92,37 @@ export const adminController = {
         }
         await book.setAuthors(parsedAuthors.map(author => author.id)); // on ne garde que les id pour envoyer à Sequelize
       }
-      
+
       await book.save();
       res.json({ message: "Livre mis à jour.", book });
     } catch (error) {
       res.status(500).json({ message: "Erreur lors de la mise à jour du livre." });
     }
   },
+
+  async addBook(req, res) {
+    try {
+      const { title, synopsis, release_date, authors } = req.body;
+
+      const newBook = await Book.create({
+        title,
+        synopsis,
+        release_date,
+        cover: req.file
+          ? `${req.protocol}://${req.get("host")}/uploads/books/images/${req.file.filename}`
+          : null
+      });
+
+      if (authors) {
+        const parsedAuthors = JSON.parse(authors);
+        await newBook.setAuthors(parsedAuthors.map(author => author.id));
+      }
+
+      res.status(201).json({ message: "Livre créé avec succès", book: newBook });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Erreur lors de la création du livre." });
+    }
+  }
+
 }
