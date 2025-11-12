@@ -1,5 +1,5 @@
 import path from "path";
-import { User, Book } from "../models/index.js";
+import { User, Book, Author } from "../models/index.js";
 
 export const adminController = {
 
@@ -69,7 +69,7 @@ export const adminController = {
   async updateBook(req, res) {
     try {
       const { id } = req.params;
-      const { title, synopsis, release_date } = req.body;
+      const { title, synopsis, release_date, authors } = req.body;
 
       const book = await Book.findByPk(id);
       if (!book) return res.status(404).json({ message: "Livre introuvable." });
@@ -78,31 +78,25 @@ export const adminController = {
       book.synopsis = synopsis || book.synopsis;
       book.release_date = release_date || book.release_date;
 
+      if (req.file) {
+        book.cover = `${req.protocol}://${req.get("host")}/uploads/books/images/${req.file.filename}`;
+      }
+
+      if (authors) {
+        let parsedAuthors = [];
+        try {
+          parsedAuthors = JSON.parse(authors); // on convertit les auteurs en tableau d'objets & éviter une erreur 500
+        } catch (error) {
+          console.error("Erreur de parsing des auteurs :", error);
+          return res.status(400).json({ message: "Format des auteurs invalide." });
+        }
+        await book.setAuthors(parsedAuthors.map(author => author.id)); // on ne garde que les id pour envoyer à Sequelize
+      }
+      
       await book.save();
       res.json({ message: "Livre mis à jour.", book });
     } catch (error) {
       res.status(500).json({ message: "Erreur lors de la mise à jour du livre." });
-    }
-  },
-
-
-  async uploadCover(req, res) {
-    try {
-      const book = await Book.findByPk(req.params.id);
-      if (!book) {
-        return res.status(404).json({ error: "Livre non trouvé" });
-      }
-      book.cover = `${req.protocol}://${req.get("host")}/uploads/books/images/${req.file.filename
-        }`;
-      await book.save();
-
-      res.status(200).json({
-        message: "Image de couverture téléchargée avec succès",
-        cover_url: book.cover,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Erreur serveur" });
     }
   },
 }
