@@ -70,6 +70,7 @@ export const adminController = {
     try {
       const { id } = req.params;
       const { title, synopsis, release_date, authors } = req.body;
+      console.log(req.body);
 
       const book = await Book.findByPk(id);
       if (!book) return res.status(404).json({ message: "Livre introuvable." });
@@ -90,12 +91,14 @@ export const adminController = {
           console.error("Erreur de parsing des auteurs :", error);
           return res.status(400).json({ message: "Format des auteurs invalide." });
         }
-        await book.setAuthors(parsedAuthors.map(author => author.id)); // on ne garde que les id pour envoyer à Sequelize
+        await book.setAuthors(parsedAuthors);
       }
 
       await book.save();
-      res.json({ message: "Livre mis à jour.", book });
+
+      res.json({ message: "Livre mis à jour.", book});
     } catch (error) {
+      console.log(error)
       res.status(500).json({ message: "Erreur lors de la mise à jour du livre." });
     }
   },
@@ -117,6 +120,7 @@ export const adminController = {
         const parsedAuthors = JSON.parse(authors);
         await newBook.setAuthors(parsedAuthors.map(author => author.id));
       }
+
 
       res.status(201).json({ message: "Livre créé avec succès", book: newBook });
     } catch (error) {
