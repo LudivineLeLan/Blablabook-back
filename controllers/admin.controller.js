@@ -105,7 +105,7 @@ export const adminController = {
 
   async addBook(req, res) {
     try {
-      const { title, synopsis, release_date, authors } = req.body;
+      const { title, synopsis, release_date, authors, genres } = req.body;
 
       const newBook = await Book.create({
         title,
@@ -117,9 +117,15 @@ export const adminController = {
       });
 
       if (authors) {
-        const parsedAuthors = JSON.parse(authors);
-        await newBook.setAuthors(parsedAuthors.map(author => author.id));
+        const parsedAuthors = JSON.parse(authors);   
+        await newBook.setAuthors(parsedAuthors);     
       }
+
+      if (genres) {
+        const parsedGenres = JSON.parse(genres);    
+        await newBook.setGenres(parsedGenres);
+      }
+
 
 
       res.status(201).json({ message: "Livre créé avec succès", book: newBook });
