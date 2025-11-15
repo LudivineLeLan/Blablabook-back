@@ -15,7 +15,7 @@ export const bookController = {
       res.json(books);
     } catch (error) {
       console.log(error)
-      res.status(500).json({ error: "Erreur lors de la récupération des livres" });
+      res.status(500).json({ error });
         
     }
   },

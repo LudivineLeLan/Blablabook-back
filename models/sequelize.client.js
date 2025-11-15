@@ -9,6 +9,12 @@ export const sequelize = new Sequelize(
       createdAt: "created_at", // mapping des nom de champs, pour la récuperation
       updatedAt: "updated_at",
       underscored: true, // synchroniser les champs en snake_case
+    },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // Render fournit un certificat auto-signé
+      }
     }
   }
 );
