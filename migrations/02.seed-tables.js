@@ -88,29 +88,42 @@ const user6 = await User.create({
   token_reset_expires: null
 });
 
+const user7 = await User.create({
+  name: "Le Lan",
+  firstname: "Ludivine",
+  age: 33,
+  role: "admin",
+  email: "ludivine.lelan@hotmail.fr",
+  password: "blablabook",
+  avatar: "🤓",
+  is_confirmed: true,
+  token_confirm: null,
+  token_reset: null,
+  token_reset_expires: null
+});
 
 
 // notre premier livre
-const book = await Book.create({ title: "Le livre sans nom", release_date: "2010-06-03", cover: "http://localhost:3000/uploads/books/images/le-livre-sans-nom.jpg", synopsis: "Santa Mondega, une ville d'Amérique du Sud oubliée du reste du monde, où sommeillent de terribles secrets... Un mystérieux tueur en série, qui assassine ceux qui ont eu la malchance de lire un énigmatique 'livre sans nom'... La seule victime encore vivante du tueur, qui, après cinq ans de coma, se réveille, amnésique... Deux flics très spéciaux, un tueur à gages sosie d'Elvis Presley, des barons du crime, des moines férus d'arts martiaux, une pierre précieuse à la valeur inestimable, un massacre dans un monastère isolé, quelques clins d'œil à Seven et à The Ring... et voilà le thriller le plus rock'n'roll et le plus jubilatoire de l'année !", });
-const book2 = await Book.create({ title: "Orgueil et Préjugés", release_date: "1813-01-28", cover: "http://localhost:3000/uploads/books/images/orgueil-et-prejuges.jpg", synopsis: "Une romance classique sur les mœurs et les préjugés dans l’Angleterre du XIXe siècle." });
-const book3 = await Book.create({ title: "Wild", release_date: "2012-03-20", cover: "http://localhost:3000/uploads/books/images/wild.jpg", synopsis: "Le récit autobiographique de Cheryl Strayed, une randonnée de 1700 km pour se reconstruire." });
-const book4 = await Book.create({ title: "Veiller sur elle", release_date: "2023-01-05", cover: "http://localhost:3000/uploads/books/images/veillier-sur-elle.jpg", synopsis: "Un roman poignant sur la mémoire, la guerre et la résilience." });
-const book5 = await Book.create({ title: "Rendez-vous avec le crime", release_date: "2014-06-12", cover: "http://localhost:3000/uploads/books/images/les-dectives-du-yorkshire.jpg", synopsis: "Une enquête cosy dans un village anglais menée par une bibliothécaire curieuse." });
-const book6 = await Book.create({ title: "Paradise Kiss", release_date: "2000-01-01", cover: "http://localhost:3000/uploads/books/images/paradise-kiss.jpg", synopsis: "Un manga sur la mode, l’amour et la quête de soi dans le Tokyo branché." });
-const book7 = await Book.create({ title: "NANA", release_date: "2000-05-26", cover: "http://localhost:3000/uploads/books/images/nana.jpg", synopsis: "Deux jeunes femmes nommées Nana, liées par le destin et les émotions dans un Tokyo vibrant." });
-const book8 = await Book.create({ title: "Les Optimistes", release_date: "2019-02-07", cover: "http://localhost:3000/uploads/books/images/les-optimistes.jpg", synopsis: "Un roman sur la mémoire, la musique et les liens familiaux à travers les générations." });
-const book9 = await Book.create({ title: "Le Sympathisant", release_date: "2015-04-02", cover: "http://localhost:3000/uploads/books/images/le-sympathisant.jpg", synopsis: "Un espion vietnamien infiltré dans la communauté exilée aux États-Unis après la guerre." });
-const book10 = await Book.create({ title: "Le journal de Mr Darcy", release_date: "2007-09-15", cover: "http://localhost:3000/uploads/books/images/le-journal-de-mr-darcy.jpg", synopsis: "Une réécriture intime du classique de Jane Austen, vue par Darcy lui-même." });
-const book11 = await Book.create({ title: "La petite confiserie de l’allée nocturne", release_date: "2021-11-10", cover: "http://localhost:3000/uploads/books/images/la-petite-confiserie-de-l-allee-nocturne.jpg", synopsis: "Un conte sucré et mystérieux dans une ruelle magique où les souvenirs prennent goût." });
-const book12 = await Book.create({ title: "Impardonnable", release_date: "2015-03-12", cover: "http://localhost:3000/uploads/books/images/impardonnable.jpg", synopsis: "Un roman noir sur la culpabilité, le silence et les conséquences irréversibles." });
-const book13 = await Book.create({ title: "Golden Kamui Tome 1", release_date: "2014-08-01", cover: "http://localhost:3000/uploads/books/images/golden-kamuy-tome-1.jpg", synopsis: "Un manga d’aventure historique sur la chasse au trésor dans le Japon de l’ère Meiji." });
-const book14 = await Book.create({ title: "Ernestine", release_date: "2022-09-22", cover: "http://localhost:3000/uploads/books/images/ernestine.jpg", synopsis: "Une héroïne singulière dans un roman tendre et drôle sur la solitude et la liberté." });
-const book15 = await Book.create({ title: "Les Sept Sœurs", release_date: "2014-12-01", cover: "http://localhost:3000/uploads/books/images/les-sept-soeurs.jpg", synopsis: "Une saga familiale inspirée des constellations, pleine de mystère et de voyages." });
-const book16 = await Book.create({ title: "La Servante Écarlate", release_date: "1985-09-01", cover: "http://localhost:3000/uploads/books/images/la-servante-ecarlate.jpg", synopsis: "Un roman dystopique sur la domination patriarcale et la résistance féminine." });
-const book17 = await Book.create({ title: "Druss la Légende", release_date: "1993-06-01", cover: "http://localhost:3000/uploads/books/images/druss-la-legende.jpg", synopsis: "Une épopée fantasy sur un guerrier mythique, entre honneur, combat et solitude." });
-const book18 = await Book.create({ title: "Endymion", release_date: "1996-02-01", cover: "http://localhost:3000/uploads/books/images/endymion.jpg", synopsis: "Une aventure de science-fiction dans l’univers d’Hyperion, entre poésie et technologie." });
-const book19 = await Book.create({ title: "Le Seigneur des Anneaux", release_date: "1954-07-29", cover: "http://localhost:3000/uploads/books/images/le-seigneur-des-anneaux.jpg", synopsis: "La quête épique de l’Anneau unique dans un monde fantastique peuplé de héros et de ténèbres." });
-const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "http://localhost:3000/uploads/books/images/conan.jpg", synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
+const book = await Book.create({ title: "Le livre sans nom", release_date: "2010-06-03", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/le-livre-sans-nom.jpg", synopsis: "Santa Mondega, une ville d'Amérique du Sud oubliée du reste du monde, où sommeillent de terribles secrets... Un mystérieux tueur en série, qui assassine ceux qui ont eu la malchance de lire un énigmatique 'livre sans nom'... La seule victime encore vivante du tueur, qui, après cinq ans de coma, se réveille, amnésique... Deux flics très spéciaux, un tueur à gages sosie d'Elvis Presley, des barons du crime, des moines férus d'arts martiaux, une pierre précieuse à la valeur inestimable, un massacre dans un monastère isolé, quelques clins d'œil à Seven et à The Ring... et voilà le thriller le plus rock'n'roll et le plus jubilatoire de l'année !", });
+const book2 = await Book.create({ title: "Orgueil et Préjugés", release_date: "1813-01-28", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/orgueil-et-prejuges.jpg", synopsis: "Une romance classique sur les mœurs et les préjugés dans l’Angleterre du XIXe siècle." });
+const book3 = await Book.create({ title: "Wild", release_date: "2012-03-20", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/wild.jpg", synopsis: "Le récit autobiographique de Cheryl Strayed, une randonnée de 1700 km pour se reconstruire." });
+const book4 = await Book.create({ title: "Veiller sur elle", release_date: "2023-01-05", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/veillier-sur-elle.jpg", synopsis: "Un roman poignant sur la mémoire, la guerre et la résilience." });
+const book5 = await Book.create({ title: "Rendez-vous avec le crime", release_date: "2014-06-12", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/les-dectives-du-yorkshire.jpg", synopsis: "Une enquête cosy dans un village anglais menée par une bibliothécaire curieuse." });
+const book6 = await Book.create({ title: "Paradise Kiss", release_date: "2000-01-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/paradise-kiss.jpg", synopsis: "Un manga sur la mode, l’amour et la quête de soi dans le Tokyo branché." });
+const book7 = await Book.create({ title: "NANA", release_date: "2000-05-26", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/nana.jpg", synopsis: "Deux jeunes femmes nommées Nana, liées par le destin et les émotions dans un Tokyo vibrant." });
+const book8 = await Book.create({ title: "Les Optimistes", release_date: "2019-02-07", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/les-optimistes.jpg", synopsis: "Un roman sur la mémoire, la musique et les liens familiaux à travers les générations." });
+const book9 = await Book.create({ title: "Le Sympathisant", release_date: "2015-04-02", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/le-sympathisant.jpg", synopsis: "Un espion vietnamien infiltré dans la communauté exilée aux États-Unis après la guerre." });
+const book10 = await Book.create({ title: "Le journal de Mr Darcy", release_date: "2007-09-15", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/le-journal-de-mr-darcy.jpg", synopsis: "Une réécriture intime du classique de Jane Austen, vue par Darcy lui-même." });
+const book11 = await Book.create({ title: "La petite confiserie de l’allée nocturne", release_date: "2021-11-10", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/la-petite-confiserie-de-l-allee-nocturne.jpg", synopsis: "Un conte sucré et mystérieux dans une ruelle magique où les souvenirs prennent goût." });
+const book12 = await Book.create({ title: "Impardonnable", release_date: "2015-03-12", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/impardonnable.jpg", synopsis: "Un roman noir sur la culpabilité, le silence et les conséquences irréversibles." });
+const book13 = await Book.create({ title: "Golden Kamui Tome 1", release_date: "2014-08-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/golden-kamuy-tome-1.jpg", synopsis: "Un manga d’aventure historique sur la chasse au trésor dans le Japon de l’ère Meiji." });
+const book14 = await Book.create({ title: "Ernestine", release_date: "2022-09-22", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/ernestine.jpg", synopsis: "Une héroïne singulière dans un roman tendre et drôle sur la solitude et la liberté." });
+const book15 = await Book.create({ title: "Les Sept Sœurs", release_date: "2014-12-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/les-sept-soeurs.jpg", synopsis: "Une saga familiale inspirée des constellations, pleine de mystère et de voyages." });
+const book16 = await Book.create({ title: "La Servante Écarlate", release_date: "1985-09-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/la-servante-ecarlate.jpg", synopsis: "Un roman dystopique sur la domination patriarcale et la résistance féminine." });
+const book17 = await Book.create({ title: "Druss la Légende", release_date: "1993-06-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/druss-la-legende.jpg", synopsis: "Une épopée fantasy sur un guerrier mythique, entre honneur, combat et solitude." });
+const book18 = await Book.create({ title: "Endymion", release_date: "1996-02-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/endymion.jpg", synopsis: "Une aventure de science-fiction dans l’univers d’Hyperion, entre poésie et technologie." });
+const book19 = await Book.create({ title: "Le Seigneur des Anneaux", release_date: "1954-07-29", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/le-seigneur-des-anneaux.jpg", synopsis: "La quête épique de l’Anneau unique dans un monde fantastique peuplé de héros et de ténèbres." });
+const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/conan.jpg", synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
 
 
 // Les userbooks
