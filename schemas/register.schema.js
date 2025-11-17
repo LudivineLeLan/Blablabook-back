@@ -8,4 +8,4 @@ export const registerSchema = Joi.object({
   password: Joi.string().pattern(/^[\p{L}\p{N}!@#$%^&*()_+\-=[\]{}|;:'",.<>?/]{8,30}$/u).required(),
   avatar: Joi.string().allow('').optional(),
   age: Joi.number().integer().min(0).max(120).optional()
-}).unknown(); // ← autorise les champs comme "confirmer mot de passe" sans les valider
+}).unknown(); 

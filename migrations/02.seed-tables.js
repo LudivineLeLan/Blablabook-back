@@ -2,8 +2,6 @@ import { Genre, Book, Author, User, UserBook, sequelize } from "../models/index.
 
 console.log("🌱 Seeding des tables...");
 
-// Notre premier user !
-// USERS
 const user1 = await User.create({
   name: "Doe",
   firstname: "John",
@@ -40,7 +38,7 @@ const user3 = await User.create({
   email: "ludivine.durand@example.com",
   password: "passLudi456",
   avatar: "👩‍🎨",
-  is_confirmed: false, // utilisateur non confirmé pour test
+  is_confirmed: false,
   token_confirm: null,
   token_reset: null,
   token_reset_expires: null
@@ -103,7 +101,6 @@ const user7 = await User.create({
 });
 
 
-// notre premier livre
 const book = await Book.create({ title: "Le livre sans nom", release_date: "2010-06-03", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/le-livre-sans-nom.jpg", synopsis: "Santa Mondega, une ville d'Amérique du Sud oubliée du reste du monde, où sommeillent de terribles secrets... Un mystérieux tueur en série, qui assassine ceux qui ont eu la malchance de lire un énigmatique 'livre sans nom'... La seule victime encore vivante du tueur, qui, après cinq ans de coma, se réveille, amnésique... Deux flics très spéciaux, un tueur à gages sosie d'Elvis Presley, des barons du crime, des moines férus d'arts martiaux, une pierre précieuse à la valeur inestimable, un massacre dans un monastère isolé, quelques clins d'œil à Seven et à The Ring... et voilà le thriller le plus rock'n'roll et le plus jubilatoire de l'année !", });
 const book2 = await Book.create({ title: "Orgueil et Préjugés", release_date: "1813-01-28", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/orgueil-et-prejuges.jpg", synopsis: "Une romance classique sur les mœurs et les préjugés dans l’Angleterre du XIXe siècle." });
 const book3 = await Book.create({ title: "Wild", release_date: "2012-03-20", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/wild.jpg", synopsis: "Le récit autobiographique de Cheryl Strayed, une randonnée de 1700 km pour se reconstruire." });
@@ -126,7 +123,6 @@ const book19 = await Book.create({ title: "Le Seigneur des Anneaux", release_dat
 const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "https://blablabook-back-470s.onrender.com/uploads/books/images/conan.jpg", synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
 
 
-// Les userbooks
 
 const userbook1 = await UserBook.bulkCreate([
   { user_id: user2.id, book_id: book20.id, toRead: true },
@@ -150,7 +146,6 @@ const userbook4 = await UserBook.create({ user_id: user5.id, book_id: book9.id, 
 const userbook5 = await UserBook.create({ user_id: user6.id, book_id: book18.id, toRead: false });
 
 
-// Les auteurs 
 
 const author1 = await Author.create({
   name: "Dumas",
@@ -267,14 +262,13 @@ const author19 = await Author.create({
 });
 
 
-// Les genres
 
 const genre1 = await Genre.create({ name: "Roman" });
 const genre2 = await Genre.create({ name: "Romance" });
 const genre3 = await Genre.create({ name: "Autobiographie" });
 const genre4 = await Genre.create({ name: "Drame" });
 const genre5 = await Genre.create({ name: "Polar" });
-const genre6 = await Genre.create({ name: "Manga" }); // pour Paradise Kiss et NANA
+const genre6 = await Genre.create({ name: "Manga" });
 const genre7 = await Genre.create({ name: "Contemporain" });
 const genre8 = await Genre.create({ name: "Thriller politique" });
 const genre9 = await Genre.create({ name: "Réécriture classique" });
@@ -289,7 +283,6 @@ const genre17 = await Genre.create({ name: "Science-fiction" });
 const genre18 = await Genre.create({ name: "High Fantasy" });
 const genre19 = await Genre.create({ name: "Sword & Sorcery" });
 
-// Voici notre table de liaison concernant book → auteur
 
 
 await book2.addAuthor(author2);   // Orgueil et Préjugés → Jane Austen
@@ -313,7 +306,6 @@ await book19.addAuthor(author18); // Seigneur des Anneaux → J.R.R. Tolkien
 await book20.addAuthor(author19); // Conan → Robert E. Howard
 
 
-// Voici notre table de liaison concernant book → genre
 
 await book2.addGenre(genre2);   // Orgueil et Préjugés → Romance
 await book3.addGenre(genre3);   // Wild → Autobiographie
@@ -336,6 +328,6 @@ await book19.addGenre(genre18); // Seigneur des Anneaux → High Fantasy
 await book20.addGenre(genre19); // Conan → Sword & Sorcery
 
 
-console.log("🎉 Seeding terminé avec succès");
+console.log("Seeding terminé avec succès");
 await sequelize.close();
 

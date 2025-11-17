@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 import { loginSchema } from "../schemas/login.schema.js";
 import { registerSchema } from "../schemas/register.schema.js";
-import { v4 as uuidv4 } from "uuid"; // utilisé AVANT la connexion pour valider un lien unique
+import { v4 as uuidv4 } from "uuid"; 
 
 
 
@@ -36,7 +36,7 @@ export const userAuthentificationController = {
         token_confirm: tokenConfirm
       });
 
-      // Lien de confirmation
+      // Lien de confirmation de création de compte
       const confirmLink = `https://blablabook-2025.onrender.com/compte-confirme?token=${tokenConfirm}`;
       res.status(201).json({
         message: "Compte créé ! Vérifie ton email pour le confirmer avant de te connecter.",
@@ -99,7 +99,6 @@ export const userAuthentificationController = {
         { expiresIn: "7d" }
       );
 
-      // Renvoyer le token ET l'utilisateur
       res.status(200).json({
         message: "Utilisateur connecté",
         token,
@@ -143,10 +142,9 @@ export const userAuthentificationController = {
 
       const tokenReset = uuidv4();
       user.token_reset = tokenReset;
-      user.token_reset_expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 jours
+      user.token_reset_expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); 
       await user.save();
 
-      // on renvoie le token au front
       res.status(200).json({ message: "Token généré", token: tokenReset });
     } catch (error) {
       console.error(error);

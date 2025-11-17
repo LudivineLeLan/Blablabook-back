@@ -70,7 +70,6 @@ export const adminController = {
     try {
       const { id } = req.params;
       const { title, synopsis, release_date, authors } = req.body;
-      console.log(req.body);
 
       const book = await Book.findByPk(id);
       if (!book) return res.status(404).json({ message: "Livre introuvable." });
@@ -86,7 +85,7 @@ export const adminController = {
       if (authors) {
         let parsedAuthors = [];
         try {
-          parsedAuthors = JSON.parse(authors); // on convertit les auteurs en tableau d'objets & éviter une erreur 500
+          parsedAuthors = JSON.parse(authors);
         } catch (error) {
           console.error("Erreur de parsing des auteurs :", error);
           return res.status(400).json({ message: "Format des auteurs invalide." });
@@ -98,7 +97,6 @@ export const adminController = {
 
       res.json({ message: "Livre mis à jour.", book});
     } catch (error) {
-      console.log(error)
       res.status(500).json({ message: "Erreur lors de la mise à jour du livre." });
     }
   },

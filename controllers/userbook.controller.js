@@ -2,7 +2,6 @@ import { User, Book, UserBook, Author } from '../models/index.js';
 
 export const userbookController = {
   async getBooks(req, res) {
-    //parseInt pour convertir paramètres de la query string en nombre entier 
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
     const offset = (page - 1) * limit;

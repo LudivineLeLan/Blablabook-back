@@ -14,9 +14,8 @@ export const bookController = {
       });
       res.json(books);
     } catch (error) {
-      console.log(error)
       res.status(500).json({ error });
-        
+
     }
   },
 
@@ -72,16 +71,15 @@ export const bookController = {
       const { q, type } = req.query;
 
       if (!q || q.trim().length < 2) {
-        return res.json([]); // on retourne un tableau vide si recherche de moins de 2 caractères
+        return res.json([]);
       }
 
-      const searchTerm = q.trim(); //supprime les espaces
-      const words = searchTerm.split(/\s+/); //sépare le terme en mots
+      const searchTerm = q.trim();
+      const words = searchTerm.split(/\s+/);
 
       let results = [];
 
       if (!type || type === "title") {
-        // Recherche dans les titres
         results = [...results, ...(await Book.findAll({
           where: {
             [Op.or]: [
@@ -94,7 +92,6 @@ export const bookController = {
       }
 
       if (!type || type === "author") {
-        // Recherche par auteur
         results = [...results, ...(await Book.findAll({
           include: [
             {
@@ -116,7 +113,6 @@ export const bookController = {
       }
 
       if (!type || type === "genre") {
-        // Recherche par genre
         results = [...results, ...(await Book.findAll({
           include: [
             { model: Author, as: "authors" },
@@ -130,9 +126,8 @@ export const bookController = {
         }))];
       }
 
-      // Dédupliquer : sert à n'afficher qu'une fois un livre qui correspond à plusieurs requêtes 
       const uniqueBooks = results.reduce((uniqueList, book) => {
-        if (!uniqueList.find(existingBook => existingBook.id === book.id)) uniqueList.push(book); // si le livre n'existe pas, on l'ajoute
+        if (!uniqueList.find(existingBook => existingBook.id === book.id)) uniqueList.push(book);
         return uniqueList;
       }, []);
 
