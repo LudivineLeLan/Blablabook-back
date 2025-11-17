@@ -45,13 +45,15 @@
 
 ##  Fonctionnalités principales
 
--  Authentification sécurisée (JWT + Argon2)
+-  Authentification sécurisée (JWT + Argon2) + confirmation de création de compte par mail (via EmailJS) + réinitialisation du mot de passe
 -  Ajout, suppression et statut des livres (lu / à lire)
 -  Upload d’avatar et de couverture de livre
 -  Barre de recherche dynamique
 -  Page “mon compte” avec affichage limité et boutons interactifs
--  Interface responsive et accessible (ARIA, mobile-first)
-
+-  Possibilité d'éditer les informations du profil et de supprimer son compte
+-  Interface administrateur permettant de gérer les utilisateurs (modification du rôle user/admin, suppression de compte) et les livres (ajout, modification, suppression)
+-  Interface responsive et accessible (ARIA, mobile-first, mode sombre)
+  
 ---
 
 ##  Pré-requis
@@ -84,3 +86,5 @@ cd frontend
 npm install
 npm run dev
 ```
+##  Déploiement
+Le site est déployé sur [https://blablabook-2025.onrender.com](https://blablabook-2025.onrender.com/)

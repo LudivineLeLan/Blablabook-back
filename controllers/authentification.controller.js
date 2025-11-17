@@ -5,7 +5,6 @@ import { User } from "../models/user.model.js";
 import { loginSchema } from "../schemas/login.schema.js";
 import { registerSchema } from "../schemas/register.schema.js";
 import { v4 as uuidv4 } from "uuid"; // utilisé AVANT la connexion pour valider un lien unique
-import { sendEmail } from "../config/email.js"; //déclencher le mail auto 
 
 
 
@@ -38,10 +37,7 @@ export const userAuthentificationController = {
       });
 
       // Lien de confirmation
-      const confirmLink = `http://localhost:5173/compte-confirme?token=${tokenConfirm}`;
-
-      /*       await sendEmail(process.env.EMAILJS_TEMPLATE_ID_CONFIRM, email, { confirm_link: confirmLink });
-       */
+      const confirmLink = `https://blablabook-2025.onrender.com/compte-confirme?token=${tokenConfirm}`;
       res.status(201).json({
         message: "Compte créé ! Vérifie ton email pour le confirmer avant de te connecter.",
         confirmLink
