@@ -16,7 +16,7 @@ export const sequelize = new Sequelize(process.env.DB_URL, {
     ? {
       ssl: {
         require: true,
-        rejectUnauthorized: false, // nécessaire pour Render
+        rejectUnauthorized: false, 
       },
     }
     : {},
@@ -27,7 +27,6 @@ export const sequelize = new Sequelize(process.env.DB_URL, {
     await sequelize.authenticate();
     console.log("Connexion à la DB réussie");
 
-    // Crée les tables si elles n'existent pas, ou les met à jour si alter:true
     await sequelize.sync({ alter: true });
   } catch (error) {
     console.error("Erreur DB :", error);
