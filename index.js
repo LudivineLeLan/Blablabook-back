@@ -18,6 +18,10 @@ app.use(xss());
 
 app.use('/uploads', express.static('uploads'));
 
+app.get('/ping', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.use(apiRouter);
 
 
