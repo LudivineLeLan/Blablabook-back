@@ -18,7 +18,7 @@ app.use(xss());
 
 app.use('/uploads', express.static('uploads'));
 
-app.get('/ping', (req, res) => {
+app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
 
