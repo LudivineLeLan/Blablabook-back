@@ -1,4 +1,5 @@
 import { Genre, Book, Author, User, UserBook, sequelize } from "../models/index.js";
+import argon2 from "argon2";
 
 console.log("🌱 Seeding des tables...");
 
@@ -8,7 +9,7 @@ const user1 = await User.create({
   age: 25,
   role: "user",
   email: "John@Doe.example",
-  password: "123456abc",
+  password: await argon2.hash("123456abc"),
   avatar: "😂",
   is_confirmed: true,
   token_confirm: null,
@@ -22,7 +23,7 @@ const user2 = await User.create({
   age: 32,
   role: "user",
   email: "sebastien.martin@example.com",
-  password: "passSeba123",
+  password: await argon2.hash("passSeba123"),
   avatar: "🧔",
   is_confirmed: true,
   token_confirm: null,
@@ -36,7 +37,7 @@ const user3 = await User.create({
   age: 29,
   role: "user",
   email: "ludivine.durand@example.com",
-  password: "passLudi456",
+  password: await argon2.hash("passLudi456"),
   avatar: "👩‍🎨",
   is_confirmed: false,
   token_confirm: null,
@@ -50,7 +51,7 @@ const user4 = await User.create({
   age: 45,
   role: "user",
   email: "claude.bernard@example.com",
-  password: "passClaude789",
+  password: await argon2.hash("passClaude789"),
   avatar: "🧓",
   is_confirmed: true,
   token_confirm: null,
@@ -64,7 +65,7 @@ const user5 = await User.create({
   age: 27,
   role: "user",
   email: "bastien.lemoine@example.com",
-  password: "passBastien321",
+  password: await argon2.hash("passBastien321"),
   avatar: "👨‍💻",
   is_confirmed: false,
   token_confirm: null,
@@ -78,7 +79,7 @@ const user6 = await User.create({
   age: 34,
   role: "user",
   email: "vincent.dupuis@example.com",
-  password: "passVincent654",
+  password: await argon2.hash("passVincent654"),
   avatar: "🧠",
   is_confirmed: true,
   token_confirm: null,
@@ -92,7 +93,7 @@ const user7 = await User.create({
   age: 33,
   role: "admin",
   email: "ludivine.lelan@hotmail.fr",
-  password: "blablabook",
+  password: await argon2.hash("blablabook"),
   avatar: "🤓",
   is_confirmed: true,
   token_confirm: null,
