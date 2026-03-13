@@ -1,7 +1,6 @@
 import { sequelize } from "../models/index.js";
 
 console.log("Connexion à la DB...");
-
 await sequelize.authenticate();
 console.log("Connexion réussie !");
 
