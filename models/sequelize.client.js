@@ -1,6 +1,9 @@
 import "dotenv/config";
 import { Sequelize } from "sequelize";
 
+const DB_URL = process.env.DB_URL || process.env.DATABASE_URL;
+const isProd = process.env.NODE_ENV === "production";
+
 if (!process.env.DB_URL) {
   throw new Error("La variable d'environnement DB_URL n'est pas définie !");
 }
@@ -22,13 +25,13 @@ export const sequelize = new Sequelize(process.env.DB_URL, {
     : {},
 });
 
-// (async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log("Connexion à la DB réussie");
+ (async () => {
+try {
+await sequelize.authenticate();
+console.log("Connexion à la DB réussie");
 
-//     await sequelize.sync({ force: true });
-//   } catch (error) {
-//     console.error("Erreur DB :", error);
-//   }
-// })();
+await sequelize.sync({ force: true });
+ } catch (error) {
+console.error("Erreur DB :", error);
+}
+})();
