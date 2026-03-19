@@ -107,7 +107,8 @@ export const userAuthentificationController = {
           name: user.name,
           firstname: user.firstname,
           email: user.email,
-          age: user.age
+          age: user.age,
+          role: user.role
         }
       });
     } catch (error) {
@@ -120,7 +121,7 @@ export const userAuthentificationController = {
     try {
       const user = await User.findOne({
         where: { id: req.user.id },
-        attributes: ["id", "name", "email", "firstname", "age", "avatar"]
+        attributes: ["id", "name", "email", "firstname", "age", "avatar", "role"]
       });
 
       if (!user) {
