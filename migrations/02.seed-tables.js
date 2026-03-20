@@ -1,6 +1,8 @@
 import { Genre, Book, Author, User, UserBook, sequelize } from "../models/index.js";
 import argon2 from "argon2";
 
+const DEFAULT_PASSWORD = process.env.SEED_PASSWORD || "password123";
+
 console.log("🌱 Seeding des tables...");
 
 const user1 = await User.create({
@@ -9,7 +11,7 @@ const user1 = await User.create({
   age: 25,
   role: "user",
   email: "John@Doe.example",
-  password: await argon2.hash("123456abc"),
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "😂",
   is_confirmed: true,
   token_confirm: null,
@@ -23,7 +25,7 @@ const user2 = await User.create({
   age: 32,
   role: "user",
   email: "sebastien.martin@example.com",
-  password: await argon2.hash("passSeba123"),
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "🧔",
   is_confirmed: true,
   token_confirm: null,
@@ -37,7 +39,7 @@ const user3 = await User.create({
   age: 29,
   role: "user",
   email: "ludivine.durand@example.com",
-  password: await argon2.hash("passLudi456"),
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "👩‍🎨",
   is_confirmed: false,
   token_confirm: null,
@@ -51,7 +53,7 @@ const user4 = await User.create({
   age: 45,
   role: "user",
   email: "claude.bernard@example.com",
-  password: await argon2.hash("passClaude789"),
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "🧓",
   is_confirmed: true,
   token_confirm: null,
@@ -65,7 +67,7 @@ const user5 = await User.create({
   age: 27,
   role: "user",
   email: "bastien.lemoine@example.com",
-  password: await argon2.hash("passBastien321"),
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "👨‍💻",
   is_confirmed: false,
   token_confirm: null,
@@ -79,7 +81,7 @@ const user6 = await User.create({
   age: 34,
   role: "user",
   email: "vincent.dupuis@example.com",
-  password: await argon2.hash("passVincent654"),
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "🧠",
   is_confirmed: true,
   token_confirm: null,
@@ -88,12 +90,12 @@ const user6 = await User.create({
 });
 
 const user7 = await User.create({
-  name: "Le Lan",
+  name: "Admin",
   firstname: "Ludivine",
   age: 33,
   role: "admin",
-  email: "ludivine.lelan@hotmail.fr",
-  password: await argon2.hash("blablabook"),
+  email: "admin@example.com",
+  password: await argon2.hash(DEFAULT_PASSWORD),
   avatar: "🤓",
   is_confirmed: true,
   token_confirm: null,
