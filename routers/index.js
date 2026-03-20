@@ -5,6 +5,7 @@ import { genreRouter } from "./genre.router.js";
 import { userRouter } from "./user.router.js";
 import { userbookRouter } from "./userbook.router.js";
 import { adminRouter } from "./admin.routes.js";
+import { authAdmin } from "../middlewares/authAdmin.js";
 
 
 export const apiRouter = Router();
@@ -14,4 +15,4 @@ apiRouter.use(authorRouter);
 apiRouter.use(genreRouter);
 apiRouter.use(userRouter);
 apiRouter.use(userbookRouter);
-apiRouter.use("/admin", adminRouter);
+apiRouter.use("/admin", authAdmin, adminRouter);
