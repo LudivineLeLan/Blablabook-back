@@ -37,7 +37,7 @@ export const userAuthentificationController = {
       });
 
       // Lien de confirmation de création de compte
-      const confirmLink = `https://blablabook-2025.onrender.com/compte-confirme?token=${tokenConfirm}`;
+      const confirmLink = `https://blablabook.ludivinelelan.fr/compte-confirme?token=${tokenConfirm}`;
       res.status(201).json({
         message: "Compte créé ! Vérifie ton email pour le confirmer avant de te connecter.",
         confirmLink
