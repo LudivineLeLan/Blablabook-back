@@ -87,4 +87,4 @@ npm install
 npm run dev
 ```
 ##  Déploiement
-Le site est déployé sur [https://blablabook-2025.onrender.com](https://blablabook-2025.onrender.com/)
+Le site est déployé sur [https://blablabook.ludivinelelan.fr/](https://blablabook.ludivinelelan.fr/)
